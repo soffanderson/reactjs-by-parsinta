@@ -1,60 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function App() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [name, setName] = useState("");
+function App(props) {
+  const [loading, setLoading] = useState(false);
+  const [identifier, setIdentifier] = useState(1);
+  const [user, setUser] = useState([]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setName(`${firstname} ${lastname}`);
-    setFirstname("");
-    setLastname("");
+  const getUser = async () => {
+    setLoading(true);
+    try {
+      let response = await axios.get(
+        `https://jsonplaceholder.typicode.com/users/${identifier}`
+      );
+      setUser(response.data);
+      setLoading(false);
+    } catch (e) {
+      setLoading(true);
+      console.log(e.massage);
+    }
   };
 
+  useEffect(() => {
+    getUser();
+  }, [identifier]);
+
   return (
-    <div className="p-5">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-header">Learn React Js</div>
-              <div className="card-body">
-                <form onSubmit={submitHandler}>
-                  <div className="mb-4">
-                    <label htmlFor="fistname" className="form-label">
-                      Firstname
-                    </label>
-                    <input
-                      value={firstname}
-                      onChange={(e) => setFirstname(e.target.value)}
-                      type="text"
-                      name="firstname"
-                      id="firstname"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="lastname" className="form-label">
-                      Lastname
-                    </label>
-                    <input
-                      value={lastname}
-                      onChange={(e) => setLastname(e.target.value)}
-                      type="text"
-                      name="lastname"
-                      id="lastname"
-                      className="form-control"
-                    />
-                  </div>
-                  <button className="btn btn-block btn-primary" type="submit">
-                    Submit
-                  </button>
-                </form>
-              </div>
-              <div className="card-footer">
-                My name is {name ? name : "..."}
-              </div>
+    <div>
+      <div className="py-5">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-8">
+              <input
+                type="text"
+                name="identifier"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                className="form-control"
+              />
+              {loading ? (
+                <div className="text-center py-2">Loading . . .</div>
+              ) : (
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Website</th>
+                      <th>Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr key={user.id}>
+                      <td>{user.name}</td>
+                      <td>{user.username}</td>
+                      <td>{user.email}</td>
+                      <td>{user.website}</td>
+                      <td>{user.phone}</td>
+                    </tr>
+
+                    {/* {users.map((user) => {
+                    return (
+                      <tr key={user.id}>
+                        <td>{user.name}</td>
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.website}</td>
+                        <td>{user.phone}</td>
+                      </tr>
+                    );
+                  })} */}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
