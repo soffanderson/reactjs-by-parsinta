@@ -1,3 +1,5 @@
+// useEffect adalah fungsi render ketika pertama kali web dimuat
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 

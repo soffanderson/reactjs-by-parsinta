@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../views/Home";
 import About from "../views/About";
+import Contact from "../views/Contact";
 
 function Router(props) {
   return (
@@ -11,6 +12,9 @@ function Router(props) {
       </Routes>
       <Routes>
         <Route exact path="/about" element={<About />} />
+      </Routes>
+      <Routes>
+        <Route exact path="/contact" element={<Contact />} />
       </Routes>
     </>
   );
