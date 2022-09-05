@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import About from "../views/About";
 import Contact from "../views/Contact";
 import NotFoundPage from "../views/errors/NotFoundPage";
+import Navbar from "../components/Navbar";
 
 function Router(props) {
   return (
