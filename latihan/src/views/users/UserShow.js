@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function Show(props) {
+function UserShow(props) {
     const [user, setUser] = useState([]);
     let { identifier } = useParams();
+
     const getUser = async () => {
         try {
             let response = await axios.get(
@@ -35,4 +36,4 @@ function Show(props) {
     );
 }
 
-export default Show;
+export default UserShow;
