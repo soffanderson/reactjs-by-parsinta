@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { UserProvider } from "../context/User";
+import AuthenticationUser from "./AuthenticationUser";
 
 function Navbar(props) {
     return (
@@ -48,6 +50,20 @@ function Navbar(props) {
                                     to="/users"
                                 >
                                     Users
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    exact="true"
+                                    className="nav-link "
+                                    to="/"
+                                >
+                                    <UserProvider>
+                                        <div className="d-flex">
+                                            <div className="me-1">Hello, </div>
+                                            <AuthenticationUser />
+                                        </div>
+                                    </UserProvider>
                                 </NavLink>
                             </li>
                         </ul>
