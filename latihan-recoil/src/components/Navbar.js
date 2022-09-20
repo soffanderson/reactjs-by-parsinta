@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { UserProvider } from "../context/User";
-import AuthenticationUser from "./AuthenticationUser";
+import { useRecoilValue } from "recoil";
+import { authUser } from "../store";
 
 function Navbar(props) {
+    const { user } = useRecoilValue(authUser);
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -58,12 +60,7 @@ function Navbar(props) {
                                     className="nav-link "
                                     to="/"
                                 >
-                                    <UserProvider>
-                                        <div className="d-flex">
-                                            <div className="me-1">Hello, </div>
-                                            <AuthenticationUser />
-                                        </div>
-                                    </UserProvider>
+                                    {user.name}
                                 </NavLink>
                             </li>
                         </ul>

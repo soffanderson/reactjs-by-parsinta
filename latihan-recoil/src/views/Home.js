@@ -1,16 +1,13 @@
 import React from "react";
-import AuthenticationUser from "../components/AuthenticationUser";
-import { UserProvider } from "../context/User";
+import { useRecoilState } from "recoil";
+import { theme } from "../store";
 
 function Home(props) {
+    const [currentTheme, setTheme] = useRecoilState(theme);
+
     return (
         <div className="container">
-            <UserProvider>
-                <div className="d-flex">
-                    <div className="me-1">My name is : </div>
-                    <AuthenticationUser />
-                </div>
-            </UserProvider>
+            You're selecting the {currentTheme} theme!
         </div>
     );
 }
