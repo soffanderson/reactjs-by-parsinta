@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { authUser } from "../store";
 
 function Navbar(props) {
+    // gunakan useRecoilValue jika menggunakan selector pada recoil
     const { user } = useRecoilValue(authUser);
 
     return (

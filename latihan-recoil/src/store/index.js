@@ -1,11 +1,13 @@
 import { atom, selector } from "recoil";
 import axios from "axios";
 
+// fungsi atom seperti useState, menyimpan state saja
 const theme = atom({
     key: "switch-theme",
     default: "dark",
 });
 
+// fungsi selector adalah agar data bisa langusng kita filter melalui fungsi
 const authUser = selector({
     key: "auth-user",
     get: async () => {
