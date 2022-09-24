@@ -1,6 +1,11 @@
 import React from "react";
+import Autenticated from "../../middleware/Autenticated";
 
 function Login(props) {
-    return <div className="container">Login</div>;
+    return (
+        <Autenticated>
+            <div className="container">Login</div>
+        </Autenticated>
+    );
 }
 export default Login;

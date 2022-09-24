@@ -1,11 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { autenticated } from "../store";
 
 function Navbar(props) {
+    const auth = useRecoilValue(autenticated);
+
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
+            <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3 mb-2">
+                <div className="container">
                     <NavLink className="navbar-brand" to="/">
                         Navbar
                     </NavLink>
@@ -29,27 +33,48 @@ function Navbar(props) {
                                 <NavLink
                                     exact="true"
                                     className="nav-link"
-                                    to="/"
+                                    to="/home"
                                 >
                                     Home
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/dashboard">
-                                    Dashboard
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/login">
-                                    Login
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/register">
-                                    Register
-                                </NavLink>
+                                {auth.check && (
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="/dashboard"
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                )}
                             </li>
                         </ul>
+                        {auth.check ? (
+                            <ul className="navbar-nav mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/login">
+                                        {auth.user.name}
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        ) : (
+                            <ul className="navbar-nav mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/login">
+                                        Login
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink
+                                        className="nav-link"
+                                        to="/register"
+                                    >
+                                        Register
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
                     </div>
                 </div>
             </nav>
